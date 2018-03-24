@@ -24,6 +24,14 @@ $.fn.enterKey = function (fnc) {
     })
 }
 
+function disable_backup(){
+    $('#backupButton').prop("disabled",true);
+}
+
+function enable_backup(){
+    $('#backupButton').prop("disabled",false);
+}
+
 function createNewDate( month, day, year ){
     var newDate = new Date();
     
@@ -61,6 +69,7 @@ function getDaysAgo( date ){
 }
 
 function getProductName(UPC, callback){
+    disable_backup();
     crawler_error = "//W3C//DTD XHTML 1.0 Transi";
     
     $.ajax({ //try to get product name from the database
@@ -70,17 +79,14 @@ function getProductName(UPC, callback){
         dataType: "html",
         success: function(db_data) {
             if( db_data == "UNKNOWN" ){ //we don't know the name of this product
-            
                 $.ajax({ //let's look up the product name using the python crawler
                     type: 'POST',
                     url: "/cgi-bin/UPC_crawler.cgi?UPC="+UPC,
                     success: function(crawl_data){
                         if( crawl_data.indexOf(crawler_error) != -1 ){ //did the crawler fail?
+                            enable_backup();
                             callback({title:UPC, UPC:true}); //return the UPC to indicate this failure
                         } else { //did the crawler succeed?
-                        
-                            console.log("POSTing to product_name_insert.php: ",{ UPC:UPC, name:crawl_data });
-                        
                             $.ajax({ //put the product name into the database
                                 type: "POST",
                                 url: "product_name_insert.php",
@@ -89,194 +95,229 @@ function getProductName(UPC, callback){
                                 success: function(response) {
                                 }
                             });
-                            
                             //return the product name we got from the python crawler
+                            enable_backup();
                             callback({title:crawl_data, UPC:false});
                         }
                     }
                 });
-                
             } else {
+                enable_backup();
                 callback({title:db_data, UPC:false})
             }
         }
     });    
 }
 
-$(document).ready(function() {
-    function removeProduct(ID){
-        $.ajax({
-           type: "POST",
-           url: "pantry_remove.php",
-           dataType: "html",
-           data: { ID: ID },
-           success: function(response) {
-               $(".Product"+ID).remove();
-           }
-        });
-    }
-    
-    function openProduct(ID){
-        $.ajax({
-           type: "POST",
-           url: "pantry_open.php",
-           dataType: "html",
-           data: { ID: ID },
-           success: function(response) {
-                $(".Product"+ID + " td").each(function(a,elem){
-                    $(elem).removeClass("opening");
-                });
-                $("td#Product"+ID+"Opened").text("Today")
-           }
-        });
-    }
-    
-    function getRemoveButton(ID){
-        return $("<input>")
-            .prop("type","button")
-            .prop("value","X")
-            .click((function(ID){ return function(){
-                $(".Product"+ID + " td").each(function(a,elem){
-                    $(elem).addClass("deleting");
-                });
-                setTimeout((function(ID){ return function(){
-                    var choice = window.confirm("Are you sure you want to remove this?")
-                    if( choice ){
-                        removeProduct(ID);
-                    } else {
-                        $(".Product"+ID + " td").each(function(a,elem){
-                            $(elem).removeClass("deleting");
-                        });
-                    }
-                }})(ID),5);
-            }})(ID))
-    }
-    
-    function getOpenButton(ID){
-        return $("<input>")
-            .prop("type","button")
-            .prop("value","Open")
-            .click((function(ID){ return function(){
-                $(".Product"+ID + " td").each(function(a,elem){
-                    $(elem).addClass("opening");
-                });
-                setTimeout((function(ID){ return function(){
-                    var choice = window.confirm("You're opening this product?")
-                    if( choice ){
-                        openProduct(ID);
-                    } else {
-                        $(".Product"+ID + " td").each(function(a,elem){
-                            $(elem).removeClass("opening");
-                        });
-                    }
-                }})(ID),5);
-            }})(ID))
-    }
-    
-    function getEditableProductName(UPC){
-        var func = function(){
-            var productUPC = $(this).prop("data-upc");
-            var productName = $(this).val();
-            
-            $(this).parent().append(productName);
-            $(this).remove();
-            
-            $.ajax({ //put the product name into the database
-                type: "POST",
-                url: "product_name_insert.php",
-                data: { UPC:productUPC, name:productName },
-                dataType: "html",
-                success: function(response) {
+function removeProduct(ID){
+    disable_backup();
+    $.ajax({
+       type: "POST",
+       url: "pantry_remove.php",
+       dataType: "html",
+       data: { ID: ID },
+       success: function(response) {
+           $(".Product"+ID).remove();
+           enable_backup();
+       }
+    });
+}
+
+function openProduct(ID){
+    disable_backup();
+    $.ajax({
+       type: "POST",
+       url: "pantry_open.php",
+       dataType: "html",
+       data: { ID: ID },
+       success: function(response) {
+            $(".Product"+ID + " td").each(function(a,elem){
+                $(elem).removeClass("opening");
+            });
+            $("td#Product"+ID+"Opened").text("Today");
+            enable_backup();
+       }
+    });
+}
+
+function getRemoveButton(ID){
+    return $("<input>")
+        .prop("type","button")
+        .prop("value","X")
+        .click((function(ID){ return function(){
+            $(".Product"+ID + " td").each(function(a,elem){
+                $(elem).addClass("deleting");
+            });
+            setTimeout((function(ID){ return function(){
+                var choice = window.confirm("Are you sure you want to remove this?")
+                if( choice ){
+                    removeProduct(ID);
+                } else {
+                    $(".Product"+ID + " td").each(function(a,elem){
+                        $(elem).removeClass("deleting");
+                    });
                 }
+            }})(ID),5);
+        }})(ID))
+}
+
+function getOpenButton(ID){
+    return $("<input>")
+        .prop("type","button")
+        .prop("value","Open")
+        .click((function(ID){ return function(){
+            $(".Product"+ID + " td").each(function(a,elem){
+                $(elem).addClass("opening");
             });
-        }
+            setTimeout((function(ID){ return function(){
+                var choice = window.confirm("You're opening this product?")
+                if( choice ){
+                    openProduct(ID);
+                } else {
+                    $(".Product"+ID + " td").each(function(a,elem){
+                        $(elem).removeClass("opening");
+                    });
+                }
+            }})(ID),5);
+        }})(ID))
+}
+
+function getEditableProductName(UPC){
+    var func = function(){
+        var productUPC = $(this).prop("data-upc");
+        var productName = $(this).val();
         
-        return $("<input>")
-            .prop("data-upc", UPC)
-            .prop("type", "textbox")
-            .prop("maxlength", 40)
-            .css("width","100%")
-            .val("Unknown Product Name")
-            .enterKey(func)
-            .focusout(func)
-            .click(function(){
-                $(this).select();
-            });
+        $(this).parent().append(productName);
+        $(this).remove();
+        
+        $.ajax({ //put the product name into the database
+            type: "POST",
+            url: "product_name_insert.php",
+            data: { UPC:productUPC, name:productName },
+            dataType: "html",
+            success: function(response) {
+            }
+        });
     }
     
-    function handleSelect(response){
-        try{
-            eval(response);
-        }catch(e){
-            console.error("Error parsing: ", response);
+    return $("<input>")
+        .prop("data-upc", UPC)
+        .prop("type", "textbox")
+        .prop("maxlength", 40)
+        .css("width","100%")
+        .val("Unknown Product Name")
+        .enterKey(func)
+        .focusout(func)
+        .click(function(){
+            $(this).select();
+        });
+}
+
+function handleSelect(response){
+    try{
+        eval(response);
+    }catch(e){
+        console.error("Error parsing: ", response);
+        return;
+    }
+    
+    result.forEach(function(row){
+        getProductName(row.UPC, (function(row){ return function(data){
+            
+            var productTitle = data.title;
+            if( data.UPC ){ //we were unable to retrieve the product name, so the title is just a UPC
+                productTitle = getEditableProductName(data.title);
+            }
+                
+            var productRow = $("<tr>")
+                    .addClass("Product"+row.ID)
+                    .append($("<td>")
+                        .append(row.UPC)
+                    ).append($("<td>")
+                        .append(productTitle)
+                    ).append($("<td>")
+                        .append(getDaysAgo(row.purchased))
+                        .prop("id","Product" + row.ID + "Purchased")
+                    ).append($("<td>")
+                        .append(getDaysAgo(row.opened))
+                        .prop("id","Product" + row.ID + "Opened")
+                    ).append($("<td>")
+                        .append(getOpenButton(row.ID))
+                    ).append($("<td>")
+                        .append(getRemoveButton(row.ID))
+                    );
+            
+            if( data.UPC ) { //we were unable to retrieve the product name, so send this row to the top so the user can enter the product name
+                console.log("hewwo");
+                productRow.insertAfter( $('table#results #titleRow') );
+            } else {
+                $('#result table#results').append(productRow);
+            }
+            
+        }; //getProductName callback function
+      })(row));
+    }); //result.forEach
+}
+
+function listProducts(){
+    disable_backup();
+    $("#results").show();
+    $('div#result table#results tr').each(function(index, row){
+        if( index == 0 ){
             return;
         }
         
-        result.forEach(function(row){
-            getProductName(row.UPC, (function(row){ return function(data){
-                
-                var productTitle = data.title;
-                if( data.UPC ){ //we were unable to retrieve the product name, so the title is just a UPC
-                    productTitle = getEditableProductName(data.title);
-                }
-                    
-                var productRow = $("<tr>")
-                        .addClass("Product"+row.ID)
-                        .append($("<td>")
-                            .append(row.UPC)
-                        ).append($("<td>")
-                            .append(productTitle)
-                        ).append($("<td>")
-                            .append(getDaysAgo(row.purchased))
-                            .prop("id","Product" + row.ID + "Purchased")
-                        ).append($("<td>")
-                            .append(getDaysAgo(row.opened))
-                            .prop("id","Product" + row.ID + "Opened")
-                        ).append($("<td>")
-                            .append(getOpenButton(row.ID))
-                        ).append($("<td>")
-                            .append(getRemoveButton(row.ID))
-                        );
-                
-                if( data.UPC ) { //we were unable to retrieve the product name, so send this row to the top so the user can enter the product name
-                    console.log("hewwo");
-                    productRow.insertAfter( $('table#results #titleRow') );
-                } else {
-                    $('#result table#results').append(productRow);
-                }
-                
-            }; //getProductName callback function
-          })(row));
-        }); //result.forEach
-    }
+        $(row).remove();
+    });
     
-    $("#viewButton").click(function() {
-        $("#results").show();
-        $('div#result table#results tr').each(function(index, row){
-            if( index == 0 ){
-                return;
-            }
+    $.ajax({
+       type: "GET",
+       url: "pantry_select_first.php",
+       dataType: "html",
+       success: function(response) {
+            handleSelect(response);
             
-            $(row).remove();
+            $.ajax({
+               type: "GET",
+               url: "pantry_select_second.php",
+               dataType: "html",
+               success: function(response) {
+                    handleSelect(response);
+                    enable_backup();
+               }
+            });
+       }
+    });
+}
+
+$(document).ready(function() {
+    listProducts();
+    
+    $("#backupButton").click(function(){
+        disabled_input = [];
+        
+        $('input').each(function(a,elem){
+            if( !$(elem).prop("disabled") ){
+                disabled_input.push(elem);
+                $(elem).prop("disabled",true);
+            }
         });
         
-        $.ajax({
-           type: "GET",
-           url: "pantry_select_first.php",
-           dataType: "html",
-           success: function(response) {
-                handleSelect(response);
-                
-                $.ajax({
-                   type: "GET",
-                   url: "pantry_select_second.php",
-                   dataType: "html",
-                   success: function(response) {
-                        handleSelect(response);
-                   }
-                });
-           }
-        });
+        do_backup(
+            (function(disabled_input){
+                return function(){ 
+                    disabled_input.forEach(
+                        function(elem){
+                            $(elem).prop("disabled",false)
+                        }
+                    );
+                };
+            })(disabled_input)
+        );
+    });
+    
+    $("#viewButton").click(function() {
+        listProducts();
     });
     
     

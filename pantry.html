@@ -6,13 +6,15 @@ Pantry
 <link rel="stylesheet" href="styles.css">
 <script language="javascript" type="text/javascript" src="jquery-3.1.1.min.js"></script>
 <script language="javascript" type="text/javascript" src="pantry_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="db_backup.js"></script>
 </head>
 <body>
 
 <div class="center">
-    <input type="button" value="View Products in Pantry" id="viewButton"/>
+    <input type="button" value="Refresh Product List" id="viewButton"/>
     <input type="textbox" width="30" id="UPC"/>
     <input type="button" value="Add Product to Pantry" id="insertButton"/>
+    <input type="button" value="Backup Database" id="backupButton" style="margin-left:5px;"/>
     <!--<input type="button" value="UPC lookup" id="UPClookupButton"/>-->
     <div id="result">
         <span id="textResults"></span>
