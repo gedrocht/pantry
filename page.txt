@@ -1,0 +1,214 @@
+Opening...
+
+
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UPC Database: Item Record for 0012546600026</title>
+<link rel="StyleSheet" href="/style.css" type="text/css" media="screen" />
+<link rel="alternate" title="UPCDB RSS" href="https://www.upcdatabase.com/upcdb.rss" type="application/rss+xml" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="/images/upcdb-touch-icon.png" />
+</head>
+<body bgcolor="white" >
+<div id="wrapper">
+
+<div id="menu">
+
+<a href="/?session-id=00989488197b9f95937f73a79e55921a">
+<img src="/images/upcs-small.jpg" alt="UPC Database" /></a>
+<p />
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- UpperLeft -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:90px"
+     data-ad-client="ca-pub-2938286402422382"
+     data-ad-slot="1750143476"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<div>
+<form action="/login.asp" method="post">
+Username:<br/><input size="15" maxlength="20" type="text" name="username" /><br/>
+Password:<br/><input size="15" maxlength="10" type="password" name="password" /><br/>
+<!-- <input type="checkbox" name="remember"> Remember me<br /> -->
+<input type="submit" value="Login" /><br />
+<a href="/join.asp">Join</a> (<a href="/docs/faq.asp">Why?</a>)<br />
+<a href="/forgotpass.asp">Forgot Password</a>
+</form>
+</div>
+
+
+<h4>Actions:</h4>
+<p>
+<a href="/itemform.asp"><font size="-1"><b>Look Up</b></font></a><br/>
+
+<a href="/latest.asp"><font size="-1"><b>Latest</b></font></a><br/>
+
+<a href="/random_item.asp"><font size="-1"><b>Random Item</b></font></a><br/>
+</p>
+
+<h4>Info:</h4>
+<p>
+<a href="/stats.asp"><font size="-1"><b>Database Statistics</b></font></a><br/>
+<a href="/guidelines.asp"><font size="-1"><b>Data Entry Guidelines</b></font></a><br/>
+<a href="/docs/"><font size="-1"><b>More Info!</b></font></a><br/>
+<a href="/wishlist.asp"><font size="-1"><b>Wish List</b></font></a><br/>
+<a href="/docs/terms.asp"><font size="-1"><b>Terms of Use</b></font></a><br/>
+</p>
+
+<h4>Advanced:</h4>
+<p>
+
+
+<a href="/checkdigit.asp"><font size="-1"><b>Check Digit Calculator</b></font></a><br/>
+<a href="/cuecatform.asp"><font size="-1"><b>CueCat&trade; Decoder</b></font></a><br/>
+<a href="/xmlrpc.asp"><font size="-1"><b>XML-RPC</b></font></a><br/>
+</p>
+
+<p>
+
+<font size="-3">Your address: 71.184.228.202</font>
+</p>
+
+</div>
+
+
+	<div id="adcolumn">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- wideskyscraper -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-2938286402422382"
+     data-ad-slot="7160876271"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	</div>
+
+<div id="contentwrapper">
+<div id="content">
+<h2>Item Record for 0012546600026</h2>
+
+
+<script type="text/javascript">var defaultUPC = '0012546600026';</script>
+
+<table class="data">
+
+
+
+
+<tr><td>UPC-A</td><td width="50"></td><td><img src="/barcode/upc/012546600026" alt="012546600026" /></td></tr>
+
+
+
+
+<tr><td>EAN/UCC-13</td><td width="50"></td><td><img src="/barcode/ean13/0012546600026" alt="0012546600026" /></td></tr>
+
+<tr><td>Description</td><td></td><td>Trident layers wild strawberry &amp; tangy citrus sugarfree gum</td></tr>
+
+
+<tr><td>Size/Weight</td><td></td><td>14 pieces</td></tr>
+
+
+<tr><td>Issuing Country</td><td></td><td>United States</td></tr>
+
+<tr><td>Last Modified</td><td></td><td> 1 Oct 2009,  9:12 PM</td></tr>
+
+
+<tr><td>Last Modified By</td><td></td><td>
+
+dante
+
+</td></tr>
+
+
+
+<tr><td>Pending Requests</td><td></td><td>0</td></tr>
+
+<tr><td colspan="3">
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</td></tr>
+
+</table>
+
+
+
+<p>
+
+<a href="/editform.asp?upc=0012546600026">Submit Modification Request</a><br/>
+<a href="/deleteform.asp?upc=0012546600026">Submit Deletion Request</a><br/>
+</p>
+
+
+<script type="text/javascript">
+
+function validateUPC(code)
+{
+	return ! code.isNaN;
+}
+
+function getItemURL(code)
+{
+	return 'https://' + nametop.location.host + '/item/' + code;
+}
+
+</script>
+
+<p>
+<form name="upcform" method="post" action="/item.asp" onsubmit="window.location = getItemURL(this.elements.upc.value); return false;">
+<input type="text" name="upc" size="16" maxlength="13" stiscan stisubmit />
+<input type="submit" value=" Look Up UPC " />
+</form>
+</p>
+
+<script type="text/javascript">
+document.upcform.upc.value = defaultUPC;
+document.upcform.upc.select();
+document.upcform.upc.focus();
+</script>
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2938286402422382"
+     data-ad-slot="9974741873"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4492625-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body></html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>
+Pantry
+</title>
+<link rel="stylesheet" href="styles.css">
+<script language="javascript" type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script language="javascript" type="text/javascript" src="pantry_ajax.js"></script>
+</head>
+<body>
+
+<div class="center">
+    <input type="button" value="View Products in Pantry" id="viewButton"/>
+    <input type="textbox" width="30" id="UPC"/>
+    <input type="button" value="Add Product to Pantry" id="insertButton"/>
+    <!--<input type="button" value="UPC lookup" id="UPClookupButton"/>-->
+    <div id="result">
+        <span id="textResults"></span>
+        <table id="results" align="center" style="display:none">
+            <tr id="titleRow">
+                <td>UPC</td> <td>Product Name</td> <td>Purchased Date</td> <td>Opened Date</td> <td>&nbsp;</td> <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
